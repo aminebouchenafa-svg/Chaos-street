@@ -35,6 +35,7 @@ prototypage.
 | **[docs/PROMPTS-IMAGES.md](docs/PROMPTS-IMAGES.md)** | Les 24 prompts (style Pixar/Disney 3D) pour générer les illustrations des cartes |
 | **[data/master-deck.csv](data/master-deck.csv)** | La base de données source des 24 membres (pour générer les cartes) |
 | **[data/actions.csv](data/actions.csv)** | La base de données source des 16 cartes Action |
+| **[app/](app/)** | 📱 L'application compagnon **PWA** (baromètre, historique, aléas, galerie) — voir [app/README.md](app/README.md) |
 
 ---
 

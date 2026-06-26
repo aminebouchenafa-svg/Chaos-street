@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1024" />
+  <title>Décibels & Décombres — Chaos Street</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎶 DÉCIBELS &amp; DÉCOMBRES 💥</h1>
+    <p class="subtitle">Bienvenue à Chaos Street</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-view="partie">🎯 Partie</button>
+    <button class="tab" data-view="aleas">🎲 Aléas</button>
+    <button class="tab" data-view="cartes">🃏 Cartes</button>
+    <button class="tab" data-view="regles">📖 Règles</button>
+  </nav>
+
+  <main>
+    <!-- VUE PARTIE : baromètre + joueurs + historique -->
+    <section id="view-partie" class="view active">
+      <div id="setup" class="setup">
+        <h2>Nouvelle partie</h2>
+        <p>Combien de familles emménagent à Chaos Street ?</p>
+        <div id="family-picker" class="family-picker"></div>
+        <button id="start-game" class="btn-primary" disabled>Lancer la partie</button>
+      </div>
+
+      <div id="board" class="board hidden">
+        <div id="players"></div>
+        <div class="board-actions">
+          <button id="new-game" class="btn-ghost">↺ Nouvelle partie</button>
+        </div>
+        <div class="history">
+          <h3>📜 Historique <button id="clear-history" class="btn-tiny">vider</button></h3>
+          <ul id="history-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE ALÉAS : tire une carte Action au hasard -->
+    <section id="view-aleas" class="view">
+      <h2>🎲 Aléas du voisinage</h2>
+      <p class="muted">Pas de paquet sous la main ? Tire une carte Action au hasard.</p>
+      <div id="aleas-card" class="aleas-card empty">Appuie sur le bouton…</div>
+      <button id="draw-action" class="btn-primary">Tirer une carte Action</button>
+    </section>
+
+    <!-- VUE CARTES : galerie des 24 membres -->
+    <section id="view-cartes" class="view">
+      <h2>🃏 Les 24 membres</h2>
+      <div id="family-filter" class="family-filter"></div>
+      <div id="cards-grid" class="cards-grid"></div>
+    </section>
+
+    <!-- VUE RÈGLES : résumé rapide -->
+    <section id="view-regles" class="view">
+      <h2>📖 Aide-mémoire</h2>
+      <div class="rule-block">
+        <h3>Déroulement du tour</h3>
+        <p>À ton tour : <strong>POSER</strong> un membre (monte ta nuisance) <em>OU</em>
+        <strong>jouer une Action</strong>. Tu peux <strong>défausser</strong> un membre pour
+        son <strong>Coup Bas</strong> à tout moment, même hors-tour.</p>
+      </div>
+      <div class="rule-block">
+        <h3>Ordre de priorité</h3>
+        <ol>
+          <li><strong>Interruption</strong> — Carte Action hors-tour</li>
+          <li><strong>Réaction</strong> — Coup Bas (défausse)</li>
+          <li><strong>Résolution</strong> — Pouvoir d'un membre posé</li>
+          <li><strong>Majorité</strong> — Pouvoir de famille (3+ membres)</li>
+        </ol>
+      </div>
+      <div class="rule-block danger">
+        <h3>⚠️ Baromètre de Tolérance</h3>
+        <p>But : atteindre <strong>100</strong>. Si tu dépasses <strong>80</strong> →
+        <strong>CRASH SONORE</strong> : défausse la moitié de tes membres (choisis par les
+        adversaires) et ton score retombe à <strong>40</strong>.</p>
+        <p>Victoire : <strong>100+ points</strong> ET au moins <strong>4 membres</strong> en jeu.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

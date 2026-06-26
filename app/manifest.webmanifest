@@ -1,0 +1,16 @@
+{
+  "name": "Décibels & Décombres — Chaos Street",
+  "short_name": "Chaos Street",
+  "description": "Application compagnon du jeu de cartes Décibels & Décombres : baromètre de tolérance, historique et tirage d'actions aléatoires.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#140c1f",
+  "theme_color": "#1a1024",
+  "lang": "fr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
