@@ -125,17 +125,26 @@ export const MEMBERS = [
     coupBas: "Camouflage : échange Félix avec un membre adverse déjà posé sur la table." },
 ];
 
-// 16 cartes Action (8 × 2 exemplaires)
+// 16 cartes Action (8 × 2 exemplaires) — img = assets/cards/actions/<slug>.png
 export const ACTIONS = [
-  { nom: "Pétition contre le bruit", effet: "Le joueur avec le plus haut score de nuisance défausse immédiatement un membre en jeu." },
-  { nom: "Dégâts des eaux", effet: "Annule le pouvoir de quartier de tous les joueurs ce tour. Chacun pose une carte face cachée." },
-  { nom: "Réunion de copropriété", effet: "Tous les joueurs passent leur main entière au joueur de gauche." },
-  { nom: "Police municipale en patrouille", effet: "Tous les joueurs au-dessus de 60 reculent leur score de 20 points." },
-  { nom: "Échange de maison", effet: "Échange tous tes membres posés avec ceux d'un autre joueur." },
-  { nom: "Fête surprise", effet: "Pioche 3 cartes. Pose-en une immédiatement, même hors de ton tour." },
-  { nom: "Panne générale de courant", effet: "Toutes les cartes Pouvoir en jeu sont annulées jusqu'au prochain tour." },
-  { nom: "Le Voisin dénonciateur", effet: "Regarde la main d'un joueur, choisis une carte, force la défausse sans Coup Bas." },
+  { nom: "Pétition contre le bruit", slug: "petition", effet: "Le joueur avec le plus haut score de nuisance défausse immédiatement un membre en jeu." },
+  { nom: "Dégâts des eaux", slug: "degats-eaux", effet: "Annule le pouvoir de quartier de tous les joueurs ce tour. Chacun pose une carte face cachée." },
+  { nom: "Réunion de copropriété", slug: "reunion-copropriete", effet: "Tous les joueurs passent leur main entière au joueur de gauche." },
+  { nom: "Police municipale en patrouille", slug: "police", effet: "Tous les joueurs au-dessus de 60 reculent leur score de 20 points." },
+  { nom: "Échange de maison", slug: "echange-maison", effet: "Échange tous tes membres posés avec ceux d'un autre joueur." },
+  { nom: "Fête surprise", slug: "fete-surprise", effet: "Pioche 3 cartes. Pose-en une immédiatement, même hors de ton tour." },
+  { nom: "Panne générale de courant", slug: "panne-courant", effet: "Toutes les cartes Pouvoir en jeu sont annulées jusqu'au prochain tour." },
+  { nom: "Le Voisin dénonciateur", slug: "voisin-denonciateur", effet: "Regarde la main d'un joueur, choisis une carte, force la défausse sans Coup Bas." },
 ];
+
+// 2 cartes Événement — img = assets/cards/events/<slug>.png
+export const EVENTS = [
+  { nom: "Coupure d'électricité", slug: "coupure-electricite", effet: "Les Electro-Rockers ne peuvent plus utiliser leurs pouvoirs." },
+  { nom: "Pluie battante", slug: "pluie-battante", effet: "Les Sportifs Extrêmes perdent leurs bonus de déplacement." },
+];
+
+// Plateau de jeu
+export const BOARD = "assets/board/plateau-chaos-street.png";
 
 // Constantes de scoring
 export const SCORING = {

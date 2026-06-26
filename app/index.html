@@ -27,6 +27,7 @@
     <!-- VUE PARTIE : baromètre + joueurs + historique -->
     <section id="view-partie" class="view active">
       <div id="setup" class="setup">
+        <img class="board-hero" src="assets/board/plateau-chaos-street.png" alt="Plateau Chaos Street" />
         <h2>Nouvelle partie</h2>
         <p>Combien de familles emménagent à Chaos Street ?</p>
         <div id="family-picker" class="family-picker"></div>
@@ -53,38 +54,98 @@
       <button id="draw-action" class="btn-primary">Tirer une carte Action</button>
     </section>
 
-    <!-- VUE CARTES : galerie des 24 membres -->
+    <!-- VUE CARTES : galerie des cartes -->
     <section id="view-cartes" class="view">
-      <h2>🃏 Les 24 membres</h2>
+      <h2>🃏 Le deck</h2>
       <div id="family-filter" class="family-filter"></div>
       <div id="cards-grid" class="cards-grid"></div>
+      <div id="actions-grid" class="actions-grid hidden"></div>
     </section>
 
-    <!-- VUE RÈGLES : résumé rapide -->
+    <!-- VUE RÈGLES : règles complètes -->
     <section id="view-regles" class="view">
-      <h2>📖 Aide-mémoire</h2>
-      <div class="rule-block">
-        <h3>Déroulement du tour</h3>
-        <p>À ton tour : <strong>POSER</strong> un membre (monte ta nuisance) <em>OU</em>
-        <strong>jouer une Action</strong>. Tu peux <strong>défausser</strong> un membre pour
-        son <strong>Coup Bas</strong> à tout moment, même hors-tour.</p>
+      <h2>📖 Règles du jeu</h2>
+
+      <div class="rule-intro">
+        <p><em>« Ici, on ne demande pas de baisser le son. On coupe le courant. »</em></p>
+        <p>Quatre familles infernales emménagent à <strong>Chaos Street</strong>. Faites
+        craquer vos voisins pour devenir le <strong>Propriétaire Unique</strong> du quartier !</p>
       </div>
-      <div class="rule-block">
-        <h3>Ordre de priorité</h3>
+
+      <details class="rule-acc" open>
+        <summary>🎯 But du jeu</summary>
+        <p>Atteindre <strong>100 points de Nuisance</strong> sur le Baromètre de Tolérance,
+        tout en gardant <strong>au moins 4 membres</strong> de ta famille en jeu.</p>
+      </details>
+
+      <details class="rule-acc">
+        <summary>🧰 Matériel & mise en place</summary>
+        <ul>
+          <li>24 cartes Membres (6 par famille), 8 cartes Action, 2 Événements.</li>
+          <li>1 Baromètre de Tolérance (0 → 100) + 1 pion par joueur.</li>
+          <li>Chaque joueur choisit sa famille et prend ses 6 cartes.</li>
+          <li>Mélange les Actions au centre (la Pioche), distribue <strong>5 cartes</strong> à chacun.</li>
+          <li>Tous les pions démarrent à <strong>0</strong>. Le plus bruyant commence.</li>
+        </ul>
+      </details>
+
+      <details class="rule-acc">
+        <summary>🔄 Déroulement d'un tour</summary>
+        <p>À ton tour, fais <strong>UNE</strong> action :</p>
+        <ul>
+          <li><strong>POSER</strong> un membre devant toi → ton score monte de sa Nuisance.</li>
+          <li><strong>ACTION</strong> → joue une carte Action pour semer le chaos.</li>
+        </ul>
+        <p>🔁 Tu peux <strong>défausser</strong> un membre de ta main pour activer son
+        <strong>COUP BAS</strong> à tout moment, <strong>même hors de ton tour</strong>.</p>
+        <p>En fin de tour, repioche jusqu'à avoir <strong>5 cartes</strong>.</p>
+      </details>
+
+      <details class="rule-acc">
+        <summary>⚖️ Ordre de priorité</summary>
         <ol>
-          <li><strong>Interruption</strong> — Carte Action hors-tour</li>
-          <li><strong>Réaction</strong> — Coup Bas (défausse)</li>
+          <li><strong>Interruption</strong> — Carte Action jouée hors-tour</li>
+          <li><strong>Réaction</strong> — Coup Bas (défausse d'un membre)</li>
           <li><strong>Résolution</strong> — Pouvoir d'un membre posé</li>
           <li><strong>Majorité</strong> — Pouvoir de famille (3+ membres)</li>
         </ol>
-      </div>
-      <div class="rule-block danger">
-        <h3>⚠️ Baromètre de Tolérance</h3>
-        <p>But : atteindre <strong>100</strong>. Si tu dépasses <strong>80</strong> →
-        <strong>CRASH SONORE</strong> : défausse la moitié de tes membres (choisis par les
-        adversaires) et ton score retombe à <strong>40</strong>.</p>
-        <p>Victoire : <strong>100+ points</strong> ET au moins <strong>4 membres</strong> en jeu.</p>
-      </div>
+      </details>
+
+      <details class="rule-acc">
+        <summary>📊 Baromètre & Crash Sonore</summary>
+        <ul>
+          <li>Chaque membre posé fait monter ta <strong>Nuisance</strong>.</li>
+          <li>À partir de <strong>3 membres</strong> d'une famille → son <strong>Pouvoir de Quartier</strong> s'active.</li>
+          <li>⚠️ Si tu dépasses <strong>80</strong> → <strong>CRASH SONORE</strong> : défausse la
+          moitié de tes membres (choisis par les adversaires) et ton score retombe à <strong>40</strong>.</li>
+          <li>🚓 Une amende (Police) fait reculer de 20 les joueurs au-dessus de 60.</li>
+        </ul>
+      </details>
+
+      <details class="rule-acc">
+        <summary>🏁 Fin de partie</summary>
+        <p>La partie s'arrête dès qu'un joueur a <strong>100+ points</strong> ET
+        <strong>au moins 4 membres</strong> en jeu. Il devient le
+        <strong>Propriétaire Unique de Chaos Street</strong> ! Sinon, il doit redescendre
+        et se stabiliser avant de pouvoir gagner.</p>
+      </details>
+
+      <details class="rule-acc">
+        <summary>🎸🔮🛹🔧 Les 4 familles</summary>
+        <ul>
+          <li><strong>Electro-Rockers</strong> — saturer le quartier (chaos / défausse).</li>
+          <li><strong>Excentriques de l'Occulte</strong> — manipuler le destin (pioche / inversion).</li>
+          <li><strong>Sportifs Extrêmes</strong> — vitesse & esquive (hors-tour / protection).</li>
+          <li><strong>Collectionneurs de Bazar</strong> — recyclage & asphyxie (défausse / blocage).</li>
+        </ul>
+      </details>
+
+      <details class="rule-acc">
+        <summary>💡 Astuce de pro</summary>
+        <p>Ne garde pas tes cartes Action trop longtemps : elles ne rapportent aucun point.
+        <strong>Sacrifie tes membres pour protéger ta stratégie</strong>, et lâche tes Coups Bas
+        au moment où ton voisin croit avoir gagné !</p>
+      </details>
     </section>
   </main>
 

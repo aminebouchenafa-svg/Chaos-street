@@ -1,7 +1,7 @@
 // ============================================================
 //  DÉCIBELS & DÉCOMBRES — Logique de l'application compagnon
 // ============================================================
-import { FAMILIES, MEMBERS, ACTIONS, SCORING } from "./data.js";
+import { FAMILIES, MEMBERS, ACTIONS, EVENTS, SCORING } from "./data.js";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -178,10 +178,19 @@ function renderBoard() {
 
 // ---------- Aléas ----------
 $("#draw-action").addEventListener("click", () => {
-  const a = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
+  // 80% Action, 20% Événement
+  const pool = Math.random() < 0.2 ? EVENTS : ACTIONS;
+  const isEvent = pool === EVENTS;
+  const a = pool[Math.floor(Math.random() * pool.length)];
+  const dir = isEvent ? "events" : "actions";
   const card = $("#aleas-card");
   card.classList.remove("empty");
-  card.innerHTML = `<div class="a-name">⚡ ${a.nom}</div><div class="a-eff">${a.effet}</div>`;
+  card.innerHTML = `
+    <img class="aleas-img" src="assets/cards/${dir}/${a.slug}.png" alt="${a.nom}"
+         onerror="this.style.display='none'">
+    <div class="a-tag">${isEvent ? "🌩️ ÉVÉNEMENT" : "⚡ ACTION"}</div>
+    <div class="a-name">${a.nom}</div>
+    <div class="a-eff">${a.effet}</div>`;
 });
 
 // ---------- Galerie de cartes ----------
@@ -190,19 +199,42 @@ function renderFilter() {
   const wrap = $("#family-filter");
   wrap.innerHTML = "";
   const all = { id: "all", icon: "🎴", name: "Toutes" };
-  [all, ...famList].forEach((f) => {
+  const actions = { id: "actions", icon: "⚡", name: "Actions" };
+  [all, ...famList, actions].forEach((f) => {
     const chip = document.createElement("button");
     chip.className = "fam-filter-chip" + (cardFilter === f.id ? " active" : "");
-    chip.innerHTML = `${f.icon} ${f.id === "all" ? "Toutes" : f.name.replace("Les ", "")}`;
-    if (f.id !== "all") chip.style.borderColor = cardFilter === f.id ? f.color : "transparent";
+    const label = f.id === "all" ? "Toutes" : f.id === "actions" ? "Actions" : f.name.replace("Les ", "");
+    chip.innerHTML = `${f.icon} ${label}`;
+    if (f.color) chip.style.borderColor = cardFilter === f.id ? f.color : "transparent";
     chip.onclick = () => { cardFilter = f.id; renderFilter(); renderCards(); };
     wrap.appendChild(chip);
   });
 }
 
 function renderCards() {
-  const grid = $("#cards-grid");
-  grid.innerHTML = "";
+  const memGrid = $("#cards-grid");
+  const actGrid = $("#actions-grid");
+
+  // Mode Actions / Événements
+  if (cardFilter === "actions") {
+    memGrid.classList.add("hidden");
+    actGrid.classList.remove("hidden");
+    actGrid.innerHTML = "";
+    const make = (c, dir, tag, cls) => `
+      <div class="acard ${cls}">
+        <div class="athumb" style="background-image:url('assets/cards/${dir}/${c.slug}.png')">${tag}</div>
+        <div class="abody"><div class="aname">${c.nom}</div><div class="aeff">${c.effet}</div></div>
+      </div>`;
+    actGrid.innerHTML =
+      ACTIONS.map((c) => make(c, "actions", "⚡", "action")).join("") +
+      EVENTS.map((c) => make(c, "events", "🌩️", "event")).join("");
+    return;
+  }
+
+  // Mode Membres
+  actGrid.classList.add("hidden");
+  memGrid.classList.remove("hidden");
+  memGrid.innerHTML = "";
   MEMBERS.filter((m) => cardFilter === "all" || m.family === cardFilter).forEach((m) => {
     const f = FAMILIES[m.family];
     const slug = m.nom.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -217,7 +249,7 @@ function renderCards() {
         <div class="pw"><b>EN JEU :</b> ${m.enJeu}</div>
         <div class="cb"><b>COUP BAS :</b> ${m.coupBas}</div>
       </div>`;
-    grid.appendChild(el);
+    memGrid.appendChild(el);
   });
 }
 

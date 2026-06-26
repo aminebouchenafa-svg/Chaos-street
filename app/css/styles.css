@@ -89,6 +89,12 @@ h2 { font-size: 1.1rem; margin-bottom: 10px; }
   background: var(--card); color: var(--muted); cursor: pointer; float: right;
 }
 
+/* Plateau en haut du setup */
+.board-hero {
+  width: 100%; border-radius: var(--radius); margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4); display: block;
+}
+
 /* Family picker */
 .family-picker, .family-filter { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .fam-chip {
@@ -136,8 +142,19 @@ h2 { font-size: 1.1rem; margin-bottom: 10px; }
   display: flex; flex-direction: column; justify-content: center; text-align: center;
 }
 .aleas-card.empty { background: var(--card); color: var(--muted); }
+.aleas-card .aleas-img { width: 180px; max-width: 60%; border-radius: 12px; margin: 0 auto 12px; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.aleas-card .a-tag { font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; opacity: 0.9; margin-bottom: 4px; }
 .aleas-card .a-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
 .aleas-card .a-eff { font-size: 0.92rem; line-height: 1.4; }
+
+/* Galerie Actions / Événements */
+.actions-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+.acard { display: flex; gap: 10px; background: var(--card); border-radius: var(--radius); overflow: hidden; border-left: 5px solid var(--danger); }
+.acard.event { border-left-color: var(--sportifs); }
+.acard .athumb { width: 92px; min-height: 92px; flex-shrink: 0; background: #0d0817 center/cover no-repeat; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+.acard .abody { padding: 10px 12px 10px 2px; }
+.acard .aname { font-weight: 800; font-size: 0.9rem; }
+.acard .aeff { font-size: 0.78rem; color: var(--muted); margin-top: 4px; line-height: 1.3; }
 
 /* Cards grid */
 .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
@@ -169,6 +186,20 @@ h2 { font-size: 1.1rem; margin-bottom: 10px; }
 .rule-block p, .rule-block li { font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
 .rule-block ol { margin-left: 18px; }
 .rule-block.danger { border: 1px solid var(--danger); }
+
+/* Règles complètes (accordéon) */
+.rule-intro { background: linear-gradient(135deg, var(--rockers), var(--occulte)); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+.rule-intro p { font-size: 0.88rem; line-height: 1.5; margin-bottom: 6px; }
+.rule-intro p:last-child { margin-bottom: 0; }
+.rule-acc { background: var(--card); border-radius: var(--radius); padding: 4px 14px; margin-bottom: 10px; }
+.rule-acc summary { cursor: pointer; font-weight: 700; font-size: 0.92rem; padding: 10px 0; list-style: none; }
+.rule-acc summary::-webkit-details-marker { display: none; }
+.rule-acc summary::after { content: "▸"; float: right; color: var(--muted); transition: 0.2s; }
+.rule-acc[open] summary::after { transform: rotate(90deg); }
+.rule-acc p, .rule-acc li { font-size: 0.84rem; line-height: 1.5; color: var(--muted); }
+.rule-acc ul, .rule-acc ol { margin: 4px 0 12px 18px; }
+.rule-acc li { margin-bottom: 4px; }
+.rule-acc p { margin-bottom: 8px; }
 
 /* Toast */
 .toast {

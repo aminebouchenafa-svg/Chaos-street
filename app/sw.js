@@ -1,6 +1,6 @@
 // Service Worker — Décibels & Décombres
 // Cache simple "app shell" pour le fonctionnement hors-ligne.
-const CACHE = "chaos-street-v1";
+const CACHE = "chaos-street-v2";
 const ASSETS = [
   "./",
   "./index.html",
