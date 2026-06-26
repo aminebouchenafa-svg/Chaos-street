@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Maker — Décibels &amp; Décombres</title>
+  <link rel="stylesheet" href="cards.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <select id="filter">
+      <option value="all">🎴 Toutes les familles</option>
+      <option value="rockers">🎸 Electro-Rockers</option>
+      <option value="occulte">🔮 Occulte</option>
+      <option value="sportifs">🛹 Sportifs</option>
+      <option value="collectionneurs">🔧 Collectionneurs</option>
+    </select>
+    <button onclick="window.print()">🖨️ Imprimer / Export PDF</button>
+    <span class="hint">Les illustrations se chargent depuis <code>../app/assets/cards/&lt;famille&gt;/&lt;prénom&gt;.png</code></span>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <script type="module">
+    import { FAMILIES, MEMBERS } from "../app/js/data.js";
+
+    const grid = document.getElementById("grid");
+    const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+    function cardHTML(m) {
+      const f = FAMILIES[m.family];
+      const img = `../app/assets/cards/${m.family}/${slug(m.nom)}.png`;
+      return `
+      <div class="card ${m.family}">
+        <div class="card-head">
+          <div class="card-titles">
+            <div class="surnom">${m.surnom}</div>
+            <div class="nom">${m.nom} · ${m.role}</div>
+          </div>
+          <div class="fam-badge">${f.icon}</div>
+        </div>
+        <div class="art">
+          <span class="placeholder">${f.icon}</span>
+          <img src="${img}" alt="${m.nom}"
+               onload="this.previousElementSibling.style.display='none'"
+               onerror="this.style.display='none'">
+          <div class="nuisance">🔊</div>
+        </div>
+        <div class="box enjeu">
+          <div class="lbl">▶ EN JEU</div>
+          <div class="txt">${m.enJeu}</div>
+        </div>
+        <div class="box coupbas">
+          <div class="lbl">✖ COUP BAS</div>
+          <div class="txt">${m.coupBas}</div>
+        </div>
+        <div class="card-foot">Décibels &amp; Décombres · Chaos Street</div>
+      </div>`;
+    }
+
+    function render(filter = "all") {
+      grid.innerHTML = MEMBERS
+        .filter(m => filter === "all" || m.family === filter)
+        .map(cardHTML).join("");
+    }
+
+    document.getElementById("filter").addEventListener("change", e => render(e.target.value));
+    render();
+  </script>
+</body>
+</html>
