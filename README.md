@@ -32,6 +32,7 @@ prototypage.
 | **[docs/CARTES-ACTION.md](docs/CARTES-ACTION.md)** | Le deck du chaos : 16 cartes Action + cartes Événement |
 | **[docs/DESIGN.md](docs/DESIGN.md)** | Template de carte, code couleur, iconographie, descriptions visuelles |
 | **[docs/AIDE-MEMOIRE.md](docs/AIDE-MEMOIRE.md)** | La carte récap (format tarot) à distribuer aux joueurs |
+| **[docs/PROMPTS-IMAGES.md](docs/PROMPTS-IMAGES.md)** | Les 24 prompts (style Pixar/Disney 3D) pour générer les illustrations des cartes |
 | **[data/master-deck.csv](data/master-deck.csv)** | La base de données source des 24 membres (pour générer les cartes) |
 | **[data/actions.csv](data/actions.csv)** | La base de données source des 16 cartes Action |
 
